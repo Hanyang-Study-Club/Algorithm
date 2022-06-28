@@ -22,6 +22,7 @@
     <td height="140px" align="center"> <a href="https://github.com/na2na8"><img src="https://avatars.githubusercontent.com/u/32005272?s=460&v=4" width="140px" /><br/></a></td>
     <td height="140px" align="center"> <a href="https://github.com/helloda0"><img src="https://avatars.githubusercontent.com/u/31719868?s=460&v=4" width="140px" /><br/></a></td>
     <td height="140px" align="center"> <a href="https://github.com/happyOBO"><img src="https://avatars.githubusercontent.com/u/44173619?s=460&v=4" width="140px" /><br/></a></td>
+    <td height="140px" align="center"> <a href="https://github.com/dlthdnjs0517"><img src="https://avatars.githubusercontent.com/u/31719831?s=460&v=4" width="140px" /><br/></a></td>
   </tr>
   <tr>
     <td align="center">👼🏻 이민아</td>
@@ -29,6 +30,7 @@
     <td align="center">👼🏻 김나연</td>
     <td align="center">👼🏻 안다영</td>
     <td align="center">👼🏻 조정민</td>
+    <td align="center">👼🏻 이소원</td>
   </tr>
 </table>
 <br/>
