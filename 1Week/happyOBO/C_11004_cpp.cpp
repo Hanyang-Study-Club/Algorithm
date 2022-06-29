@@ -2,13 +2,59 @@
 
 using namespace std;
 
-void solution(int K);
-void mergeSort(int lt, int rt);
+template <class T>
+class MergeSorter
+{
+public:
+	MergeSorter() {}
+	MergeSorter(int N) 
+	{
+		arr.resize(N);
+		tmp.resize(N);
+	}
 
-typedef int T;
+	vector<T> Sort()
+	{
+		tmp.resize(arr.size());
+		MergeSort(0, arr.size() - 1);
 
-vector<T> arr;
-vector<T> tmp;
+		return arr;
+	}
+
+public:
+	vector<T> arr;
+
+private:
+	vector<T> tmp;
+	void MergeSort(int lt, int rt)
+	{
+		int mid;
+		int p1, p2, p3;
+		if (lt < rt)
+		{
+			mid = (lt + rt) / 2;
+			MergeSort(lt, mid);
+			MergeSort(mid + 1, rt);
+
+			p1 = lt; p2 = mid + 1; p3 = lt;
+
+			while (p1 <= mid && p2 <= rt)
+			{
+				if (arr[p1] < arr[p2])tmp[p3++] = arr[p1++];
+				else tmp[p3++] = arr[p2++];
+			}
+
+			while (p1 <= mid) tmp[p3++] = arr[p1++];
+			while (p2 <= rt) tmp[p3++] = arr[p2++];
+
+			for (int i = lt; i <= rt; i++) arr[i] = tmp[i];
+
+		}
+
+	}
+
+};
+
 
 int main()
 {
@@ -19,51 +65,12 @@ int main()
 	int N, K;
 	cin >> N >> K;
 
-	arr.resize(N);
-	tmp.resize(N);
+	MergeSorter<int> sorter = MergeSorter<int>(N);
 
 	for (int i = 0; i < N; i++)
-	{
-		cin >> arr[i];
-	}
+		cin >> sorter.arr[i];
 
-
-	solution(K);
-}
-
-
-void solution(int K)
-{
-	mergeSort(0, arr.size() - 1);
-
-	cout << arr[K - 1];
-}
-
-
-void mergeSort(int lt, int rt)
-{
-	int mid;
-	int p1, p2, p3;
-	if (lt < rt)
-	{
-		mid = (lt + rt) / 2;
-		mergeSort(lt, mid);
-		mergeSort(mid + 1, rt);
-
-		p1 = lt; p2 = mid + 1; p3 = lt;
-
-		while (p1 <= mid && p2 <= rt)
-		{
-			if (arr[p1] < arr[p2]) tmp[p3++] = arr[p1++];
-			else tmp[p3++] = arr[p2++];
-		}
-
-		while (p1 <= mid) tmp[p3++] = arr[p1++];
-		while (p2 <= rt) tmp[p3++] = arr[p2++];
-
-		for (int i = lt; i <= rt; i++) arr[i] = tmp[i];
-
-	}
-
+	vector<int> result = sorter.Sort();
+	cout << result[K - 1];
 }
 
