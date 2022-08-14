@@ -2,35 +2,55 @@
 
 using namespace std;
 
+void solution(int N, vector<pair<pair<int, int>, pair<int, int>>>& inputs);
+
+const int MAXSIZE = 1025;
+int graph[MAXSIZE][MAXSIZE] = {};
+int acc[MAXSIZE][MAXSIZE] = {};
+
+
 int main()
 {
-
-	ios_base::sync_with_stdio(false);
-	cin.tie(0);
-	cout.tie(0);
-
-	int N, K;
-	int ptr1 , result, acc = 0;
-
-	cin >> N >> K;
-
-	vector<int> v(N);
-
-
-	for (int i = 0; i < N; i++) cin >> v[i];
-
-	for (int i = 0; i < K; i++) acc += v[i];
-
-	ptr1 = 0;
-	result = acc;
-	for (int ptr2 = K; ptr2 < N; ptr2++)
+	int N, M;
+	cin >> N >> M;
+	for (int i = 1; i <= N; i++)
 	{
-		acc -= v[ptr1];
-		acc += v[ptr2];
-		result = max(result, acc);
-		ptr1++;
+		for (int j = 1; j <= N; j++)
+		{
+			cin >> graph[i][j];
+		}
 	}
 
-	cout << result;
+	vector<pair<pair<int, int>, pair<int, int>>> inputs(M);
+	for (int i = 0; i < M; i++)
+	{
+		cin >> inputs[i].first.first >> inputs[i].first.second >> inputs[i].second.first >> inputs[i].second.second;
+	}
 
+	solution(N, inputs);
 }
+
+void solution(int N, vector<pair<pair<int,int>, pair<int,int>>>& inputs)
+{
+	for (int i = 1; i <= N; i++)
+	{
+		for (int j = 1; j <= N; j++)
+		{
+			acc[i][j] = graph[i][j] +
+						acc[i - 1][j] +
+						acc[i][j - 1] -
+						acc[i - 1][j - 1];
+		}
+	}
+
+	for (auto& input : inputs)
+	{
+		auto& p1 = input.first;
+		auto& p2 = input.second;
+		cout << acc[p2.first][p2.second] -
+				acc[p2.first][p1.second - 1] -
+				acc[p1.first - 1][p2.second] +
+				acc[p1.first - 1][p1.second - 1] << "\n";
+	}
+}
+
